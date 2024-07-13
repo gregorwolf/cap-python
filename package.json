@@ -1,7 +1,7 @@
 {
   "name": "cap-python",
   "version": "1.0.0",
-  "description": "A simple CAP project.",
+  "description": "CAP Application combined with Python",
   "repository": "<Add your repository here>",
   "license": "UNLICENSED",
   "private": true,
@@ -11,6 +11,7 @@
   "dependencies": {
     "@sap/cds": "^7",
     "@sap/cds-hana": "^2",
+    "@sap/xssec": "^4.1.3",
     "express": "^4"
   },
   "devDependencies": {
@@ -20,20 +21,28 @@
     "npm-run-all": "^4.1.5"
   },
   "scripts": {
-    "start": "cds-serve",
+    "start": "export CDS_ENV=development && cds-serve",
     "build": "cds build --production && run-p build:docker:*",
     "build:docker:hana-deployer": "pack build gregorwolf/cap-python-hana-deployer --path gen/db --buildpack gcr.io/paketo-buildpacks/nodejs --builder paketobuildpacks/builder-jammy-base --env BP_NODE_RUN_SCRIPTS=\"\"",
     "build:docker:cap": "pack build gregorwolf/cap-python-srv-cap --path gen/srv --buildpack gcr.io/paketo-buildpacks/nodejs --builder paketobuildpacks/builder-jammy-base --env BP_NODE_RUN_SCRIPTS=\"\"",
     "build:docker:python": "cd srv-python && docker build -t gregorwolf/cap-python-srv-python:latest .",
-    "start:docker:python": "docker run -p 8000:8000 gregorwolf/cap-python-srv-python:latest",
+    "start:docker:cap": "docker run --name cap-python-srv-cap -p 4004:4004 gregorwolf/cap-python-srv-cap",
+    "start:docker:python": "docker run --name cap-python-srv-python -p 8000:8000 gregorwolf/cap-python-srv-python:latest",
     "publish": "run-p publish:docker:*",
     "publish:docker:hana-deployer": "docker push gregorwolf/cap-python-hana-deployer",
     "publish:docker:cap": "docker push gregorwolf/cap-python-srv-cap",
-    "publish:docker:python": "docker push gregorwolf/cap-python-srv-python"
+    "publish:docker:python": "docker push gregorwolf/cap-python-srv-python",
+    "helm": "helm install cap-python ./chart"
   },
   "cds": {
     "requires": {
-      "db": "hana"
+      "db": "hana",
+      "auth": {
+        "kind": "basic",
+        "users": {
+          "alice": {}
+        }
+      }
     }
   }
 }
