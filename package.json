@@ -27,7 +27,7 @@
     "build:docker:cap": "pack build gregorwolf/cap-python-srv-cap --path gen/srv --buildpack gcr.io/paketo-buildpacks/nodejs --builder paketobuildpacks/builder-jammy-base --env BP_NODE_RUN_SCRIPTS=\"\"",
     "build:docker:python": "cd srv-python && docker build -t gregorwolf/cap-python-srv-python:latest .",
     "start:docker:cap": "docker run --name cap-python-srv-cap -p 4004:4004 gregorwolf/cap-python-srv-cap",
-    "start:docker:python": "docker run --name cap-python-srv-python -p 8000:8000 gregorwolf/cap-python-srv-python:latest",
+    "start:docker:python": "docker run --name cap-python-srv-python -p 8080:8080 gregorwolf/cap-python-srv-python:latest",
     "publish": "run-p publish:docker:*",
     "publish:docker:hana-deployer": "docker push gregorwolf/cap-python-hana-deployer",
     "publish:docker:cap": "docker push gregorwolf/cap-python-srv-cap",

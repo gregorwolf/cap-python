@@ -1,6 +1,6 @@
 ###
-GET http://localhost:8000
+GET http://localhost:8080
 ###
-GET http://localhost:8000/health
+GET http://localhost:8080/health
 ###
-GET http://localhost:8000/ping
+GET http://localhost:8080/ping
