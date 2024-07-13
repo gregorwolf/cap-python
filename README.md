@@ -1,25 +1,26 @@
-# Getting Started
+# CAP Application combined with Python
 
-Welcome to your new project.
+This is a sample project combining a CAP application with a Python application. It's target runtime is the SAP Business Technology Platform (BTP) Kyma environment.
 
 It contains these folders and files, following our recommended project layout:
 
-File or Folder | Purpose
----------|----------
-`app/` | content for UI frontends goes here
-`db/` | your domain models and data go here
-`srv/` | your service models and code go here
-`package.json` | project metadata and configuration
-`readme.md` | this getting started guide
+| File or Folder | Purpose                              |
+| -------------- | ------------------------------------ |
+| `app/`         | content for UI frontends goes here   |
+| `chart/`       | HELM Charts                          |
+| `db/`          | your domain models and data go here  |
+| `srv/`         | your service models and code go here |
+| `srv-python/`  | The Python application go here       |
+| `package.json` | project metadata and configuration   |
+| `readme.md`    | this getting started guide           |
 
+## Preconditions
 
-## Next Steps
-
-- Open a new terminal and run `cds watch`
-- (in VS Code simply choose _**Terminal** > Run Task > cds watch_)
-- Start adding content, for example, a [db/schema.cds](db/schema.cds).
-
-
-## Learn More
-
-Learn more at https://cap.cloud.sap/docs/get-started/.
+- BTP Subaccount with Kyma Runtime
+- BTP Subaccount with Cloud Foundry Space
+- HANA Cloud instance available for your Cloud Foundry space
+- BTP Entitlements for: _HANA HDI Services & Container_ plan _hdi-shared_
+- Container Registry
+- Command Line Tools: `kubectl`, `kubectl-oidc_login`, `pack`, `docker`, `helm`, `cf`
+- Logged into Kyma Runtime (with `kubectl` CLI), Cloud Foundry space (with `cf` CLI) and Container Registry (with `docker login`)
+- `@sap/cds-dk` >= 6.6.0
