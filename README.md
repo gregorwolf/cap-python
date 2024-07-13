@@ -25,6 +25,20 @@ It contains these folders and files, following our recommended project layout:
 - Logged into Kyma Runtime (with `kubectl` CLI), Cloud Foundry space (with `cf` CLI) and Container Registry (with `docker login`)
 - `@sap/cds-dk` >= 6.6.0
 
+## Prepare Kubernetes Namespace
+
+1. Export the kubeconfig.yaml
+
+   ```
+   export KUBECONFIG=~/.kube/cap-kyma-app-config
+   ```
+
+2. Setting the namespace
+
+   ```
+   kubectl config set-context --current --namespace=<<NAMESPACE>>
+   ```
+
 ## Debug deployment
 
 ```bash
