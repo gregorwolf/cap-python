@@ -32,7 +32,8 @@
     "publish:docker:hana-deployer": "docker push gregorwolf/cap-python-hana-deployer",
     "publish:docker:cap": "docker push gregorwolf/cap-python-srv-cap",
     "publish:docker:python": "docker push gregorwolf/cap-python-srv-python",
-    "helm": "helm install cap-python ./chart"
+    "helm:install": "helm install cap-python ./chart",
+    "helm:upgrade": "helm upgrade --install cap-python ./chart"
   },
   "cds": {
     "requires": {
