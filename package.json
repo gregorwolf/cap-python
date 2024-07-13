@@ -33,7 +33,8 @@
     "publish:docker:cap": "docker push gregorwolf/cap-python-srv-cap",
     "publish:docker:python": "docker push gregorwolf/cap-python-srv-python",
     "helm:install": "helm install cap-python ./chart",
-    "helm:upgrade": "helm upgrade --install cap-python ./chart"
+    "helm:upgrade": "helm upgrade --install cap-python ./chart",
+    "helm:template": "helm template  ./chart -n cap-python > gen/helm-template-cap-python.yaml"
   },
   "cds": {
     "requires": {
