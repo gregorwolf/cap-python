@@ -5,18 +5,31 @@
   "repository": "<Add your repository here>",
   "license": "UNLICENSED",
   "private": true,
+  "engines": {
+    "node": "^20"
+  },
   "dependencies": {
     "@sap/cds": "^7",
-    "express": "^4",
-    "@sap/cds-hana": "^2"
+    "@sap/cds-hana": "^2",
+    "express": "^4"
   },
   "devDependencies": {
     "@cap-js/sqlite": "^1",
     "@sap/eslint-plugin-cds": "^3",
-    "eslint": "^9"
+    "eslint": "^9",
+    "npm-run-all": "^4.1.5"
   },
   "scripts": {
-    "start": "cds-serve"
+    "start": "cds-serve",
+    "build": "cds build --production && run-p build:docker:*",
+    "build:docker:hana-deployer": "pack build gregorwolf/cap-python-hana-deployer --path gen/db --buildpack gcr.io/paketo-buildpacks/nodejs --builder paketobuildpacks/builder-jammy-base --env BP_NODE_RUN_SCRIPTS=\"\"",
+    "build:docker:cap": "pack build gregorwolf/cap-python-srv-cap --path gen/srv --buildpack gcr.io/paketo-buildpacks/nodejs --builder paketobuildpacks/builder-jammy-base --env BP_NODE_RUN_SCRIPTS=\"\"",
+    "build:docker:python": "cd srv-python && docker build -t gregorwolf/cap-python-srv-python:latest .",
+    "start:docker:python": "docker run -p 8000:8000 gregorwolf/cap-python-srv-python:latest",
+    "publish": "run-p publish:docker:*",
+    "publish:docker:hana-deployer": "docker push gregorwolf/cap-python-hana-deployer",
+    "publish:docker:cap": "docker push gregorwolf/cap-python-srv-cap",
+    "publish:docker:python": "docker push gregorwolf/cap-python-srv-python"
   },
   "cds": {
     "requires": {
