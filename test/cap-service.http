@@ -1,4 +1,8 @@
 ###
+GET http://localhost:4004/
+###
+GET http://localhost:4004/health
+###
 GET http://localhost:4004/odata/v4/catalog
 ###
 GET http://localhost:4004/odata/v4/catalog/Books
