@@ -24,3 +24,11 @@ It contains these folders and files, following our recommended project layout:
 - Command Line Tools: `kubectl`, `kubectl-oidc_login`, `pack`, `docker`, `helm`, `cf`
 - Logged into Kyma Runtime (with `kubectl` CLI), Cloud Foundry space (with `cf` CLI) and Container Registry (with `docker login`)
 - `@sap/cds-dk` >= 6.6.0
+
+## Debug deployment
+
+```bash
+kubectl get pods
+kubectl logs <pod-name>
+kubectl describe pod <pod-name>
+```
