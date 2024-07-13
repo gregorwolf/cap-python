@@ -22,7 +22,7 @@ srv:
       path: /health
     readiness:
       path: /health
-web-application:
+srv-python:
   bindings:
     db:
       serviceInstanceName: hana

@@ -10,6 +10,9 @@ dependencies:
   - name: web-application
     alias: srv
     version: ">0.0.0"
+  - name: web-application
+    alias: srv-python
+    version: ">0.0.0"
   - name: service-instance
     alias: hana
     version: ">0.0.0"
