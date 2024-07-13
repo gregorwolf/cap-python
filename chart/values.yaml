@@ -1,5 +1,7 @@
 global:
   domain: df0cf58.kyma.ondemand.com
+  imagePullSecret:
+    name: "container-registry"
 #  shootName: df0cf58
 #  gateway: kyma-system/kyma-gateway
 srv:
