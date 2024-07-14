@@ -34,3 +34,4 @@ mta_archives/
 @cds-models
 venv/
 __pycache__/
+.env
