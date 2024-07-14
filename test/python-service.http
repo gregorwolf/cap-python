@@ -1,6 +1,30 @@
 ###
 GET http://localhost:8080
 ###
+GET http://localhost:8080/docs
+###
 GET http://localhost:8080/health
 ###
 GET http://localhost:8080/ping
+###
+#GET http://localhost:8080/vcap
+###
+GET http://localhost:8080/readData
+###
+PUT http://localhost:8080/updateStock/1
+
+{
+    "ID": 1,
+    "title": "",
+    "stock": 10
+}
+###
+GET {{$dotenv python_service_url}}/readData
+###
+PUT {{$dotenv python_service_url}}/updateStock/1
+
+{
+    "ID": 1,
+    "title": "",
+    "stock": 10
+}
