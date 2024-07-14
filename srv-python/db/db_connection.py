@@ -2,12 +2,19 @@ import os
 import json
 from hdbcli import dbapi
 
-sec_path = os.getenv('DB', '/bindings/db')
-with open(os.path.join(sec_path, 'credentials')) as fh:
-    credentials = fh.read()
-# Parse JSON of credentials
-credentials = json.loads(credentials)
-
+# Get the VCAP_SERVICES (Local and Cloud Foundry)
+vcap_services = os.getenv('VCAP_SERVICES')
+if vcap_services is not None:
+    vcap_services = json.loads(vcap_services)
+    # Get the credentials from VCAP_SERVICES
+    credentials = vcap_services['hana'][0]['credentials']
+else:
+    # Get the credentials from the mounted secret (Kubernetes)
+    sec_path = os.getenv('DB', '/bindings/db')
+    with open(os.path.join(sec_path, 'credentials')) as fh:
+        credentials = fh.read()
+    # Parse JSON of credentials
+    credentials = json.loads(credentials)
 
 def _get_db_conn():
     try:
@@ -26,7 +33,6 @@ def _get_db_conn():
     # If no errors, print connected
     print("connected")
     return conn
-
 
 def execute_sql(sql_command):
     """Execute SQL and return Output"""
