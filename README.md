@@ -25,6 +25,32 @@ It contains these folders and files, following our recommended project layout:
 - Logged into Kyma Runtime (with `kubectl` CLI), Cloud Foundry space (with `cf` CLI) and Container Registry (with `docker login`)
 - `@sap/cds-dk` >= 6.6.0
 
+## Local Development
+
+To run the application locally, you need to start the CAP application and the Python application. To work directly with the HANA Cloud instance you need to connect to the Cloud Foundry Environment:
+
+```bash
+cf login --sso
+```
+
+then you can deploy with:
+
+```bash
+cds deploy --to hana
+```
+
+To run the CAP application you need to start the CAP application with:
+
+```bash
+cds watch --profile hybrid --auto-undeploy
+```
+
+To run the Python application you need to start the Python application with:
+
+```bash
+npm run start:python
+```
+
 ## Prepare Kubernetes Namespace
 
 1. Export the kubeconfig.yaml
