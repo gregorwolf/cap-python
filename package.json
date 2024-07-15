@@ -22,9 +22,10 @@
   },
   "scripts": {
     "start": "export CDS_ENV=development && cds-serve",
+    "start:cap": "cds watch --profile hybrid",
     "start:python": "cp .cdsrc-private.json srv-python/ && cd srv-python && python3 -m venv venv && source venv/bin/activate && pwd && cds bind --exec -- venv/bin/uvicorn api:app --host 0.0.0.0 --port 8080",
     "install:python:dependencies": "cd srv-python && python3 -m venv venv && source venv/bin/activate && pip install -r requirements.txt",
-    "build": "cds build --production && run-p build:docker:*",
+    "build": "cds build --production && run-s build:docker:*",
     "build:docker:hana-deployer": "pack build gregorwolf/cap-python-hana-deployer --path gen/db --buildpack gcr.io/paketo-buildpacks/nodejs --builder paketobuildpacks/builder-jammy-base --env BP_NODE_RUN_SCRIPTS=\"\"",
     "build:docker:cap": "pack build gregorwolf/cap-python-srv-cap --path gen/srv --buildpack gcr.io/paketo-buildpacks/nodejs --builder paketobuildpacks/builder-jammy-base --env BP_NODE_RUN_SCRIPTS=\"\"",
     "build:docker:python": "cd srv-python && docker buildx build --platform=linux/amd64 -t gregorwolf/cap-python-srv-python:latest .",
@@ -34,9 +35,10 @@
     "publish:docker:hana-deployer": "docker push gregorwolf/cap-python-hana-deployer",
     "publish:docker:cap": "docker push gregorwolf/cap-python-srv-cap",
     "publish:docker:python": "docker push gregorwolf/cap-python-srv-python",
+    "deploy:hana": "cds deploy --to hana --auto-undeploy",
     "helm:install": "helm install cap-python ./chart",
     "helm:upgrade": "helm upgrade --install cap-python ./chart",
-    "helm:template": "helm template  ./chart -n cap-python > gen/helm-template-cap-python.yaml"
+    "helm:template": "helm template ./chart -n cap-python > gen/helm-template-cap-python.yaml"
   },
   "cds": {
     "requires": {
