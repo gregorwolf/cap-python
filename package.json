@@ -11,7 +11,7 @@
   "dependencies": {
     "@sap/cds": "^7",
     "@sap/cds-hana": "^2",
-    "@sap/xssec": "^4.1.3",
+    "@sap/xssec": "^4",
     "express": "^4"
   },
   "devDependencies": {
@@ -42,13 +42,16 @@
   },
   "cds": {
     "requires": {
-      "db": "hana",
-      "auth": {
-        "kind": "basic",
-        "users": {
-          "alice": {}
+      "[hybrid]": {
+        "auth": {
+          "kind": "basic",
+          "users": {
+            "alice": {}
+          }
         }
-      }
+      },
+      "db": "hana",
+      "auth": "xsuaa"
     }
   }
 }

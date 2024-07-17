@@ -16,6 +16,9 @@ dependencies:
   - name: service-instance
     alias: hana
     version: ">0.0.0"
+  - name: service-instance
+    alias: xsuaa
+    version: ">0.0.0"
   - name: content-deployment
     alias: hana-deployer
     version: ">0.0.0"

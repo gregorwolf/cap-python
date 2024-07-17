@@ -37,6 +37,8 @@ then you can deploy with:
 
 ```bash
 cds deploy --to hana
+cf create-service xsuaa application cap-python-uaa -c xs-security.json
+cds bind -2 cap-python-uaa
 ```
 
 To run the CAP application you need to start the CAP application with:
@@ -59,10 +61,11 @@ npm run start:python
    export KUBECONFIG=~/.kube/cap-kyma-app-config
    ```
 
-2. Setting the namespace
+2. Create and set the namespace
 
    ```
-   kubectl config set-context --current --namespace=<<NAMESPACE>>
+   kubectl create namespace cap-python
+   kubectl config set-context --current --namespace=cap-python
    ```
 
 ## Debug deployment

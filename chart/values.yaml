@@ -1,5 +1,5 @@
 global:
-  domain: df0cf58.kyma.ondemand.com
+  domain: c-036d5aa.kyma.ondemand.com
   imagePullSecret:
     name: "container-registry"
 #  shootName: df0cf58
@@ -8,6 +8,8 @@ srv:
   bindings:
     db:
       serviceInstanceName: hana
+    auth:
+      serviceInstanceName: xsuaa
   image:
     repository: gregorwolf/cap-python-srv-cap
     tag: latest
@@ -28,6 +30,8 @@ srv-python:
   bindings:
     db:
       serviceInstanceName: hana
+    auth:
+      serviceInstanceName: xsuaa
   image:
     repository: gregorwolf/cap-python-srv-python
     tag: latest
@@ -64,3 +68,9 @@ hana:
 backendDestinations:
   backend:
     service: srv
+xsuaa:
+  serviceOfferingName: xsuaa
+  servicePlanName: application
+  parameters:
+    tenant-mode: dedicated
+    xsappname: cap-python-{{ .Release.Namespace }}
