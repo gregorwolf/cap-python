@@ -10,6 +10,8 @@ from sap import xssec
 import json
 from hdbcli import dbapi
 
+import db.db_pool as db_pool
+
 app = Flask(__name__)
 env = AppEnv()
 
@@ -33,6 +35,8 @@ else:
         uaa_service = fh.read()
     uaa_service = json.loads(uaa_service)
 
+pool = db_pool.hdb_pool(5, hana_credentials['host'], hana_credentials['port'], hana_credentials['user'], hana_credentials['password'])
+
 @app.route('/')
 def hello():
      if 'authorization' not in request.headers:
@@ -44,12 +48,7 @@ def hello():
      if not isAuthorized:
          abort(403)
 
-     conn = dbapi.connect(address=hana_credentials['host'],
-                           port=int(hana_credentials['port']),
-                           user=hana_credentials['user'],
-                           password=hana_credentials['password'],
-                           encrypt='true',
-                           sslTrustStore=hana_credentials['certificate'])
+     conn = pool.get_connection()
 
      cursor = conn.cursor()
      cursor.execute("select CURRENT_UTCTIMESTAMP from DUMMY")
