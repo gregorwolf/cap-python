@@ -75,3 +75,10 @@ kubectl get pods
 kubectl logs <pod-name>
 kubectl describe pod <pod-name>
 ```
+
+## Cleanup services for local testing
+
+```bash
+cf delete-service-key cap-python-uaa cap-python-uaa-key
+cf delete-service cap-python-uaa
+```

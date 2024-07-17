@@ -1,6 +1,15 @@
 {
   "xsappname": "cap-python",
+  "tenant-mode": "dedicated",
   "scopes": [],
   "attributes": [],
-  "role-templates": []
+  "role-templates": [],
+  "oauth2-configuration": {
+    "redirect-uris": [
+      "https://localhost:5000/**",
+      "http://localhost:5000/**",
+      "https://*.hana.ondemand.com/**",
+      "https://*.cloud.sap/**"
+    ]
+  }
 }
