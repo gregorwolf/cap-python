@@ -1,3 +1,5 @@
+# From
+# https://developers.sap.com/tutorials/btp-cf-buildpacks-python-create.html
 import os
 from flask import Flask
 from cfenv import AppEnv
@@ -17,7 +19,7 @@ vcap_services = os.getenv('VCAP_SERVICES')
 print('VCAP_SERVICES: ')
 print(vcap_services)
 if vcap_services is not None:
-    hana_credentials = env.get_service(label='db').credentials
+    hana_credentials = env.get_service(name='db').credentials
     uaa_service = env.get_service(name='auth').credentials
 else:
     # Get the credentials from the mounted secret (Kubernetes)
@@ -56,6 +58,10 @@ def hello():
      conn.close()
 
      return "Current time is: " + str(ro["CURRENT_UTCTIMESTAMP"])
+
+@app.route('/health')
+def health():
+    return {"status": "UP"}
 
 if __name__ == '__main__':
   app.run(host='0.0.0.0', port=port)

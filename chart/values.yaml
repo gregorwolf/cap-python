@@ -66,11 +66,45 @@ hana:
   serviceOfferingName: hana
   servicePlanName: hdi-shared
 backendDestinations:
-  backend:
+  srv-api-cap:
     service: srv
+  srv-api-python:
+    service: srv-python
 xsuaa:
   serviceOfferingName: xsuaa
   servicePlanName: application
   parameters:
     tenant-mode: dedicated
     xsappname: cap-python-{{ .Release.Namespace }}
+destination:
+  serviceOfferingName: "destination"
+  servicePlanName: "lite"
+  parameters:
+    version: "1.0.0"
+    HTML5Runtime_enabled: true
+html5-apps-repo-host:
+  serviceOfferingName: html5-apps-repo
+  servicePlanName: app-host
+html5-apps-deployer:
+  env:
+    SAP_CLOUD_SERVICE: cap.python
+  image:
+    repository: gregorwolf/cap-python-html5-deployer
+    tag: latest
+  bindings:
+    xsuaa:
+      serviceInstanceName: xsuaa
+    destination:
+      serviceInstanceName: destination
+    html5-apps-repo:
+      serviceInstanceName: html5-apps-repo-host
+  resources:
+    limits:
+      cpu: 2000m
+      memory: 1G
+    requests:
+      cpu: 1000m
+      memory: 1G
+  envFrom:
+    - configMapRef:
+        name: "{{ .Release.Name }}-html5-apps-deployer-configmap"
