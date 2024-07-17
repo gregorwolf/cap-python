@@ -2,3 +2,7 @@ fastapi
 pydantic
 uvicorn
 hdbcli
+
+flask
+cfenv
+sap_xssec

@@ -18,4 +18,5 @@ FROM gcr.io/distroless/python3-debian11:nonroot
 COPY --from=build-venv /venv /venv
 COPY . /app
 WORKDIR /app
-ENTRYPOINT ["/venv/bin/uvicorn", "api:app", "--host", "0.0.0.0", "--port", "8080"]
+# ENTRYPOINT ["/venv/bin/uvicorn", "api:app", "--host", "0.0.0.0", "--port", "8080"]
+ENTRYPOINT ["/venv/bin/python3", "server.py"]
