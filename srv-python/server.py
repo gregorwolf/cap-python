@@ -54,7 +54,7 @@ def hello():
      cursor.execute("select CURRENT_UTCTIMESTAMP from DUMMY")
      ro = cursor.fetchone()
      cursor.close()
-     conn.close()
+     pool.return_connection(conn)
 
      return "Current time is: " + str(ro["CURRENT_UTCTIMESTAMP"])
 
