@@ -1,3 +1,74 @@
+/*
+Generated using ChatGPT with the following prompt:
+
+Please create the needed JavaScript code that can run in Node.JS using the following JSON:
+
+```json
+{
+  "namespace": "my.bookshop",
+  "definitions": {
+    "my.bookshop.Books": {
+      "kind": "entity",
+      "elements": {
+        "ID": {
+          "key": true,
+          "type": "cds.Integer"
+        },
+        "title": {
+          "type": "cds.String"
+        },
+        "stock": {
+          "type": "cds.Integer"
+        }
+      }
+    },
+    "CatalogService": {
+      "@source": "srv/cat-service.cds",
+      "kind": "service",
+      "@requires": "authenticated-user"
+    },
+    "CatalogService.Books": {
+      "kind": "entity",
+      "@readonly": true,
+      "projection": {
+        "from": {
+          "ref": [
+            "my.bookshop.Books"
+          ]
+        }
+      },
+      "elements": {
+        "ID": {
+          "key": true,
+          "type": "cds.Integer"
+        },
+        "title": {
+          "type": "cds.String"
+        },
+        "stock": {
+          "type": "cds.Integer"
+        }
+      }
+    }
+  },
+  "meta": {
+    "creator": "CDS Compiler v4.9.4",
+    "flavor": "inferred"
+  },
+  "$version": "2.0"
+}
+```
+
+and translate all elements of kind entity into a Python class from the pydantic BaseModel following this example:
+
+
+```Python
+class Books(BaseModel):
+    ID: int
+    title: str
+    stock: int
+```
+*/
 const fs = require('fs');
 
 // Read the JSON file

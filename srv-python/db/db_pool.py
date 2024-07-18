@@ -1,3 +1,6 @@
+# Generated using ChatGPT with the following prompt:
+# Create a Python script that uses the HANA Client hdbcli but instead of using a single connection 
+# it uses a connection pool which re-uses an already established connection. 
 import queue
 import threading
 from hdbcli import dbapi
